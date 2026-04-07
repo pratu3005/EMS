@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | TSSIA Event Hub</title>
+    <meta name="description" content="Register for TSSIA Event Hub – Innovate, Connect, and Lead at our premier industry events.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Animated Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Main Page -->
+    <div class="page-wrapper" id="formPage">
+        <main class="split-container">
+
+            <!-- Left: Branding Panel -->
+            <section class="media-column">
+                <div class="media-overlay"></div>
+                <img src="bg.png" alt="TSSIA Event" class="media-img">
+                <div class="media-content">
+                    <div class="brand-badge">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>TSSIA 2025</span>
+                    </div>
+                    <h1 class="brand-title">Event<br>Hub</h1>
+                    <p class="brand-subtitle">Innovate. Connect. Lead.</p>
+                    <div class="event-meta">
+                        <div class="event-meta-item">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <span>May 15, 2025</span>
+                        </div>
+                        <div class="event-meta-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Mumbai, India</span>
+                        </div>
+                        <div class="event-meta-item">
+                            <i class="fa-solid fa-users"></i>
+                            <span>500+ Attendees</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right: Form Panel -->
+            <section class="form-column">
+                <div class="form-inner">
+                    <header class="form-header">
+                        <div class="form-header-icon">
+                            <i class="fa-solid fa-id-card-clip"></i>
+                        </div>
+                        <div>
+                            <h2>Registration</h2>
+                            <p>Fill in your professional profile</p>
+                        </div>
+                    </header>
+
+                    <form class="glass-form" id="registrationForm" novalidate>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="name">Full Name <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-user"></i>
+                                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="email">Email ID <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="mobile">Mobile <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="text" id="mobile" name="mobile" placeholder="+91 XXXXX XXXXX" required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="designation">Designation <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-briefcase"></i>
+                                    <input type="text" id="designation" name="designation" placeholder="Manager" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="orgname">Organization Name <span class="required-star">*</span></label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-building"></i>
+                                <input type="text" id="orgname" name="orgname" placeholder="Company Name Ltd." required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="gstno">GST No. <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-receipt"></i>
+                                    <input type="text" id="gstno" name="gstno" placeholder="22AAAAA0000A1Z5" required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="tssiamemno">Membership No. <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-address-card"></i>
+                                    <input type="text" id="tssiamemno" name="tssiamemno" placeholder="TSSIA-XXXX" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn-back" id="backBtn">
+                                <i class="fa-solid fa-arrow-left"></i> Back
+                            </button>
+                            <button type="submit" class="btn-register" id="submitBtn">
+                                Register Now <i class="fa-solid fa-bolt"></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Success Popup Overlay -->
+    <div class="popup-overlay" id="successPopup" aria-hidden="true">
+        <div class="popup-card" role="dialog" aria-labelledby="popupTitle" aria-modal="true">
+
+            <!-- Processing State -->
+            <div class="popup-state" id="stateProcessing">
+                <div class="spinner-ring">
+                    <div class="spinner"></div>
+                    <div class="spinner-icon"><i class="fa-solid fa-bolt"></i></div>
+                </div>
+                <h3 class="popup-title">Registering You...</h3>
+                <p class="popup-subtitle">Please wait while we secure your spot</p>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <!-- Success State -->
+            <div class="popup-state hidden" id="stateSuccess">
+                <div class="success-checkmark">
+                    <svg viewBox="0 0 52 52" class="checkmark-svg">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+
+                <div class="popup-badge">Registration Confirmed</div>
+                <h3 class="popup-title" id="popupTitle">You're In! 🎉</h3>
+                <p class="popup-subtitle">Your registration is confirmed. A confirmation email is on its way.</p>
+
+                <div class="event-detail-card">
+                    <div class="event-detail-header">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>TSSIA Annual Industry Summit 2025</span>
+                    </div>
+                    <div class="event-detail-grid">
+                        <div class="detail-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <div>
+                                <span class="detail-label">Date</span>
+                                <span class="detail-value">May 15, 2025</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-clock"></i>
+                            <div>
+                                <span class="detail-label">Time</span>
+                                <span class="detail-value">9:00 AM – 6:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <span class="detail-label">Venue</span>
+                                <span class="detail-value">BKC Convention Ctr, Mumbai</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-ticket"></i>
+                            <div>
+                                <span class="detail-label">Entry</span>
+                                <span class="detail-value">Badge at Reception</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registrant-info">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <div>
+                        <span class="detail-label">Registered as</span>
+                        <span class="detail-value" id="registrantName">—</span>
+                    </div>
+                </div>
+
+                <div class="popup-highlights">
+                    <div class="highlight-chip"><i class="fa-solid fa-wifi"></i> Networking Lounge</div>
+                    <div class="highlight-chip"><i class="fa-solid fa-utensils"></i> Lunch Included</div>
+                    <div class="highlight-chip"><i class="fa-solid fa-certificate"></i> Certificate</div>
+                </div>
+
+                <div class="popup-actions">
+                    <button class="popup-btn-back" id="popupBackBtn">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Form
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const popup = document.getElementById('successPopup');
+        const stateProcessing = document.getElementById('stateProcessing');
+        const stateSuccess = document.getElementById('stateSuccess');
+        const progressBar = document.getElementById('progressBar');
+        const registrantName = document.getElementById('registrantName');
+        const popupBackBtn = document.getElementById('popupBackBtn');
+        const backBtn = document.getElementById('backBtn');
+
+        // Show popup with processing → success transition
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            if (!name || !email) return;
+
+            registrantName.textContent = name;
+
+            // Show overlay
+            popup.classList.add('active');
+            popup.setAttribute('aria-hidden', 'false');
+            stateProcessing.classList.remove('hidden');
+            stateSuccess.classList.add('hidden');
+
+            // Animate progress bar
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 18;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    progressBar.style.width = '100%';
+                    setTimeout(showSuccess, 350);
+                } else {
+                    progressBar.style.width = progress + '%';
+                }
+            }, 160);
+        });
+
+        function showSuccess() {
+            stateProcessing.classList.add('hidden');
+            stateSuccess.classList.remove('hidden');
+            stateSuccess.classList.add('fadein');
+        }
+
+        // Back button on popup → go back to form
+        popupBackBtn.addEventListener('click', function () {
+            popup.classList.remove('active');
+            popup.setAttribute('aria-hidden', 'true');
+            stateProcessing.classList.remove('hidden');
+            stateSuccess.classList.add('hidden');
+            stateSuccess.classList.remove('fadein');
+            progressBar.style.width = '0%';
+        });
+
+        // Back button on form → browser history or custom action
+        backBtn.addEventListener('click', function () {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = '../index.html';
+            }
+        });
+
+        // Close on overlay click
+        popup.addEventListener('click', function (e) {
+            if (e.target === popup) {
+                popupBackBtn.click();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
