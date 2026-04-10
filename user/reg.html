@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | TSSIA Event Hub</title>
+    <meta name="description" content="Register for TSSIA Event Hub – Innovate, Connect, and Lead at our premier industry events.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== Design Tokens — Navy / Gold Theme ===== */
+        :root {
+            --navy:        #0a1628;
+            --navy-mid:    #0d2044;
+            --navy-light:  #163060;
+            --blue:        #1a4a8a;
+            --gold:        #c9a84c;
+            --gold-light:  #e0c06a;
+            --gold-dim:    rgba(201,168,76,0.15);
+            --gold-border: rgba(201,168,76,0.3);
+            --success:     #22c55e;
+            --text-white:  #ffffff;
+            --text-muted:  rgba(255,255,255,0.60);
+            --text-dim:    rgba(255,255,255,0.35);
+            --glass-bg:    rgba(255,255,255,0.05);
+            --glass-border:rgba(255,255,255,0.10);
+            --glass-input: rgba(255,255,255,0.07);
+            --glass-shadow:0 24px 64px rgba(0,0,0,0.55);
+            --blur: 20px;
+            --radius-xl: 1.75rem;
+            --radius-lg: 1.25rem;
+            --radius-md: 0.75rem;
+            --radius-sm: 0.5rem;
+        }
+
+        /* ===== Reset ===== */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html, body { height: 100%; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--navy);
+            color: var(--text-white);
+            position: relative;
+        }
+
+        /* ===== Animated Background ===== */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+            animation: orbFloat 14s ease-in-out infinite;
+        }
+        .orb-1 {
+            width: 520px; height: 520px;
+            background: radial-gradient(circle, rgba(13,32,68,0.8), transparent 70%);
+            top: -160px; left: -120px;
+            animation-delay: 0s;
+        }
+        .orb-2 {
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(201,168,76,0.12), transparent 70%);
+            bottom: -80px; right: -80px;
+            animation-delay: -5s;
+        }
+        .orb-3 {
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(26,74,138,0.25), transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            animation-delay: -9s;
+        }
+        @keyframes orbFloat {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33%      { transform: translate(28px,-36px) scale(1.04); }
+            66%      { transform: translate(-22px,28px) scale(0.97); }
+        }
+        .orb-3 { animation-name: orbFloat3; }
+        @keyframes orbFloat3 {
+            0%,100% { transform: translate(-50%,-50%) scale(1); }
+            33%      { transform: translate(calc(-50% + 28px), calc(-50% - 36px)) scale(1.04); }
+            66%      { transform: translate(calc(-50% - 22px), calc(-50% + 28px)) scale(0.97); }
+        }
+
+        /* ===== Page Wrapper ===== */
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            min-height: 100vh;
+            padding: 1.25rem;
+            overflow-x: hidden;
+        }
+
+        /* ===== Split Layout ===== */
+        .split-container {
+            display: flex;
+            width: 100%;
+            max-width: 1060px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+            animation: slideUp 0.65s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        /* ===== Left Media Panel ===== */
+        .media-column {
+            flex: 0 0 40%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            min-height: 500px;
+        }
+        .media-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.55) saturate(1.1);
+            transition: transform 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        .media-column:hover .media-img { transform: scale(1.05); }
+        .media-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                175deg,
+                rgba(10,22,40,0.15) 0%,
+                rgba(10,22,40,0.10) 35%,
+                rgba(10,22,40,0.88) 100%
+            );
+            z-index: 1;
+        }
+        .media-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            width: 100%;
+        }
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--gold-dim);
+            border: 1px solid var(--gold-border);
+            color: var(--gold-light);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            margin-bottom: 0.9rem;
+        }
+        .brand-title {
+            font-size: clamp(1.6rem, 5vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.0;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.35rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            color: #fff;
+        }
+        .brand-title span { color: var(--gold-light); }
+        .brand-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+        }
+        .event-meta { display: flex; flex-direction: column; gap: 0.5rem; }
+        .event-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .event-meta-item i {
+            color: var(--gold);
+            font-size: 0.75rem;
+            width: 14px;
+            text-align: center;
+        }
+
+        /* ===== Right Form Panel ===== */
+        .form-column {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            background: rgba(10,22,40,0.45);
+            border-left: 1px solid var(--glass-border);
+        }
+        .form-inner {
+            width: 100%;
+            padding: 2rem 2.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* ===== Form Header ===== */
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .form-header-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--navy-mid), var(--blue));
+            border: 1px solid var(--gold-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--gold);
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(201,168,76,0.2);
+        }
+        .form-header h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        .form-header p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+        }
+
+        /* ===== Form Layout ===== */
+        .glass-form { display: flex; flex-direction: column; gap: 0.75rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        .input-group { display: flex; flex-direction: column; gap: 0.35rem; }
+        .input-group label {
+            font-size: 0.73rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .required-star { color: var(--gold-light); font-size: 0.75rem; font-weight: 700; }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-wrapper i {
+            position: absolute;
+            left: 0.85rem;
+            color: var(--gold);
+            font-size: 0.8rem;
+            pointer-events: none;
+            transition: color 0.2s;
+            opacity: 0.7;
+        }
+        .input-wrapper input {
+            width: 100%;
+            padding: 0.65rem 0.85rem 0.65rem 2.4rem;
+            background: var(--glass-input);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: var(--text-white);
+            font-size: 0.85rem;
+            font-family: inherit;
+            transition: all 0.22s ease;
+        }
+        .input-wrapper input::placeholder { color: var(--text-dim); }
+        .input-wrapper input:focus {
+            outline: none;
+            background: rgba(255,255,255,0.10);
+            border-color: var(--gold-border);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.10);
+        }
+        .input-wrapper:focus-within i { color: var(--gold-light); opacity: 1; }
+
+        /* ===== Form Buttons ===== */
+        .form-buttons { display: flex; gap: 0.75rem; margin-top: 0.25rem; }
+        .btn-back, .btn-register {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+            border: none;
+        }
+        .btn-back {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            border: 1px solid var(--glass-border);
+            flex: 0 0 auto;
+            padding: 0.75rem 1.25rem;
+        }
+        .btn-back:hover {
+            background: rgba(255,255,255,0.09);
+            color: var(--text-white);
+            border-color: rgba(255,255,255,0.25);
+        }
+        .btn-register {
+            background: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 4px 18px rgba(201,168,76,0.35);
+            font-weight: 700;
+        }
+        .btn-register:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 28px rgba(201,168,76,0.5);
+        }
+        .btn-register:active { transform: translateY(0); }
+
+        /* ===== SUCCESS POPUP ===== */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(10,22,40,0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+        .popup-overlay.active { opacity: 1; pointer-events: all; }
+        .popup-card {
+            background: linear-gradient(145deg, rgba(13,32,68,0.98) 0%, rgba(10,22,40,0.98) 100%);
+            border: 1px solid var(--gold-border);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            max-width: 460px;
+            width: 100%;
+            max-height: calc(100vh - 2rem);
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(201,168,76,0.12);
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.38s cubic-bezier(0.34,1.56,0.64,1);
+            text-align: center;
+            scrollbar-width: none;
+        }
+        .popup-card::-webkit-scrollbar { display: none; }
+        .popup-overlay.active .popup-card { transform: scale(1) translateY(0); }
+
+        /* Processing State */
+        .popup-state { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .popup-state.hidden { display: none; }
+        .spinner-ring {
+            position: relative;
+            width: 80px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .spinner {
+            position: absolute;
+            inset: 0;
+            border: 3px solid rgba(201,168,76,0.12);
+            border-top-color: var(--gold);
+            border-right-color: var(--gold-light);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .spinner-icon {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, var(--navy-mid), var(--blue));
+            border: 1px solid var(--gold-border);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            color: var(--gold);
+            box-shadow: 0 0 20px rgba(201,168,76,0.25);
+            animation: pulseBeat 1.5s ease-in-out infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulseBeat {
+            0%,100% { transform: scale(1); box-shadow: 0 0 20px rgba(201,168,76,0.25); }
+            50%      { transform: scale(1.08); box-shadow: 0 0 35px rgba(201,168,76,0.5); }
+        }
+        .progress-bar-wrap {
+            width: 100%; height: 4px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 999px; overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .progress-bar {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 999px;
+            transition: width 0.2s linear;
+            box-shadow: 0 0 8px rgba(201,168,76,0.4);
+        }
+
+        /* Success State */
+        .fadein { animation: fadeSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .success-checkmark { width: 68px; height: 68px; margin: 0 auto 0.25rem; }
+        .checkmark-svg { width: 100%; height: 100%; }
+        .checkmark-circle {
+            stroke: var(--gold);
+            stroke-width: 2;
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: strokeCircle 0.7s cubic-bezier(0.65,0,0.45,1) 0.1s forwards;
+        }
+        .checkmark-check {
+            stroke: var(--gold-light);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: strokeCheck 0.4s cubic-bezier(0.65,0,0.45,1) 0.7s forwards;
+        }
+        @keyframes strokeCircle { to { stroke-dashoffset: 0; } }
+        @keyframes strokeCheck  { to { stroke-dashoffset: 0; } }
+
+        .popup-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--gold-dim);
+            border: 1px solid var(--gold-border);
+            color: var(--gold-light);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.85rem;
+            border-radius: 999px;
+        }
+        .popup-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.2rem;
+        }
+        .popup-subtitle {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Event Detail Card */
+        .event-detail-card {
+            background: rgba(201,168,76,0.05);
+            border: 1px solid var(--gold-border);
+            border-radius: var(--radius-lg);
+            padding: 1.1rem;
+            text-align: left;
+            width: 100%;
+        }
+        .event-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(201,168,76,0.12);
+            margin-bottom: 0.8rem;
+        }
+        .event-detail-header i { color: var(--gold); font-size: 1rem; }
+        .event-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        .detail-item { display: flex; align-items: flex-start; gap: 0.55rem; }
+        .detail-item > i {
+            color: var(--gold);
+            font-size: 0.78rem;
+            margin-top: 0.25rem;
+            width: 14px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .detail-item div { display: flex; flex-direction: column; }
+        .detail-label {
+            font-size: 0.62rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+        .detail-value {
+            font-size: 0.79rem;
+            font-weight: 500;
+            color: var(--text-white);
+        }
+
+        /* Registrant Info */
+        .registrant-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            width: 100%;
+        }
+        .registrant-info > i { font-size: 1.5rem; color: var(--gold); flex-shrink: 0; }
+        .registrant-info div { display: flex; flex-direction: column; }
+
+        /* Highlights */
+        .popup-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            justify-content: center;
+            width: 100%;
+        }
+        .highlight-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: var(--gold-dim);
+            border: 1px solid var(--gold-border);
+            color: var(--gold-light);
+            font-size: 0.71rem;
+            font-weight: 600;
+            padding: 0.32rem 0.72rem;
+            border-radius: 999px;
+        }
+        .highlight-chip i { font-size: 0.63rem; }
+
+        /* Popup Actions */
+        .popup-actions { display: flex; gap: 0.75rem; width: 100%; justify-content: center; }
+        .popup-btn-back {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.22s ease;
+            border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            min-width: 160px;
+        }
+        .popup-btn-back:hover {
+            background: rgba(255,255,255,0.09);
+            color: var(--text-white);
+            border-color: rgba(255,255,255,0.22);
+        }
+
+        /* ===== Animations ===== */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ===== Responsive: Tablet ===== */
+        @media (max-width: 860px) {
+            html, body { overflow: auto; }
+            .page-wrapper { height: auto; min-height: 100vh; padding: 1rem; }
+            .split-container { flex-direction: column; max-width: 540px; margin: 0 auto; }
+            .media-column { flex: 0 0 auto; min-height: auto; height: 200px; }
+            .brand-title { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+            .media-content { padding: 1.5rem; }
+            .form-column { border-left: none; border-top: 1px solid var(--glass-border); }
+            .popup-card { padding: 2rem 1.5rem; }
+        }
+
+        /* ===== Responsive: Mobile ===== */
+        @media (max-width: 520px) {
+            html, body { overflow-x: hidden; overflow-y: auto; }
+            .page-wrapper { padding: 0; align-items: flex-start; }
+            .split-container {
+                border-radius: 0;
+                max-width: 100%;
+                width: 100%;
+                min-height: 100dvh;
+                box-shadow: none;
+            }
+            /* Compact media/branding header strip */
+            .media-column {
+                height: auto;
+                min-height: unset;
+                flex: 0 0 auto;
+                padding: 0;
+            }
+            .media-img { position: relative; height: 140px; display: block; object-fit: cover; object-position: center; filter: brightness(0.55); }
+            .media-overlay { display: none; }
+            .media-content {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 0.85rem 1.1rem;
+                background: linear-gradient(to top, rgba(10,22,40,0.9) 0%, transparent 100%);
+            }
+            .brand-badge { font-size: 0.62rem; padding: 0.22rem 0.65rem; margin-bottom: 0.4rem; }
+            .brand-title { font-size: clamp(1.3rem, 6vw, 1.8rem); margin-bottom: 0.1rem; }
+            .brand-subtitle { font-size: 0.75rem; margin-bottom: 0.6rem; }
+            .event-meta { flex-direction: row; flex-wrap: wrap; gap: 0.3rem 0.8rem; }
+            .event-meta-item { font-size: 0.72rem; }
+            /* Form panel fills rest of screen */
+            .form-column {
+                border-left: none;
+                border-top: 1px solid var(--glass-border);
+                overflow-y: auto;
+                flex: 1;
+            }
+            .form-inner { padding: 1.25rem 1rem; gap: 0.75rem; }
+            .form-header h2 { font-size: 1.15rem; }
+            .form-header-icon { width: 36px; height: 36px; font-size: 0.9rem; }
+            .form-row { grid-template-columns: 1fr; gap: 0.6rem; }
+            .input-wrapper input { font-size: 0.82rem; padding: 0.6rem 0.75rem 0.6rem 2.2rem; }
+            .input-group label { font-size: 0.7rem; }
+            .glass-form { gap: 0.6rem; }
+            .form-buttons { flex-direction: column-reverse; gap: 0.5rem; }
+            .btn-back, .btn-register { width: 100%; padding: 0.75rem; font-size: 0.875rem; }
+            /* Popup */
+            .popup-card { padding: 1.4rem 1rem; border-radius: var(--radius-lg); max-height: 95dvh; }
+            .event-detail-grid { grid-template-columns: 1fr; }
+            .popup-title { font-size: 1.25rem; }
+            .popup-actions { flex-direction: column-reverse; }
+            .popup-btn-back { min-width: unset; width: 100%; }
+        }
+
+        /* ===== Very small screens ===== */
+        @media (max-width: 360px) {
+            .brand-title { font-size: 1.2rem; }
+            .form-inner { padding: 1rem 0.85rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Animated Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Main Page -->
+    <div class="page-wrapper" id="formPage">
+        <main class="split-container">
+
+            <!-- Left: Branding Panel -->
+            <section class="media-column">
+                <div class="media-overlay"></div>
+                <img src="bg.png" alt="TSSIA Event" class="media-img">
+                <div class="media-content">
+                    <div class="brand-badge">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>TSSIA 2025</span>
+                    </div>
+                    <h1 class="brand-title">Event<br><span>Hub</span></h1>
+                    <p class="brand-subtitle">Innovate. Connect. Lead.</p>
+                    <div class="event-meta">
+                        <div class="event-meta-item">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <span>May 15, 2025</span>
+                        </div>
+                        <div class="event-meta-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Mumbai, India</span>
+                        </div>
+                        <div class="event-meta-item">
+                            <i class="fa-solid fa-users"></i>
+                            <span>500+ Attendees</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right: Form Panel -->
+            <section class="form-column">
+                <div class="form-inner">
+                    <header class="form-header">
+                        <div class="form-header-icon">
+                            <i class="fa-solid fa-id-card-clip"></i>
+                        </div>
+                        <div>
+                            <h2>Registration</h2>
+                            <p>Fill in your professional profile</p>
+                        </div>
+                    </header>
+
+                    <form class="glass-form" id="registrationForm" novalidate>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="name">Full Name <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-user"></i>
+                                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="email">Email ID <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="mobile">Mobile <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="text" id="mobile" name="mobile" placeholder="+91 XXXXX XXXXX" required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="designation">Designation <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-briefcase"></i>
+                                    <input type="text" id="designation" name="designation" placeholder="Manager" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="orgname">Organization Name <span class="required-star">*</span></label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-building"></i>
+                                <input type="text" id="orgname" name="orgname" placeholder="Company Name Ltd." required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="gstno">GST No. <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-receipt"></i>
+                                    <input type="text" id="gstno" name="gstno" placeholder="22AAAAA0000A1Z5" required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="tssiamemno">Membership No. <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-address-card"></i>
+                                    <input type="text" id="tssiamemno" name="tssiamemno" placeholder="TSSIA-XXXX" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn-back" id="backBtn">
+                                <i class="fa-solid fa-arrow-left"></i> Back
+                            </button>
+                            <button type="submit" class="btn-register" id="submitBtn">
+                                Register Now <i class="fa-solid fa-bolt"></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Success Popup Overlay -->
+    <div class="popup-overlay" id="successPopup" aria-hidden="true">
+        <div class="popup-card" role="dialog" aria-labelledby="popupTitle" aria-modal="true">
+
+            <!-- Processing State -->
+            <div class="popup-state" id="stateProcessing">
+                <div class="spinner-ring">
+                    <div class="spinner"></div>
+                    <div class="spinner-icon"><i class="fa-solid fa-bolt"></i></div>
+                </div>
+                <h3 class="popup-title">Registering You...</h3>
+                <p class="popup-subtitle">Please wait while we secure your spot</p>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <!-- Success State -->
+            <div class="popup-state hidden" id="stateSuccess">
+                <div class="success-checkmark">
+                    <svg viewBox="0 0 52 52" class="checkmark-svg">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+
+                <div class="popup-badge">Registration Confirmed</div>
+                <h3 class="popup-title" id="popupTitle">You're In! 🎉</h3>
+                <p class="popup-subtitle">Your registration is confirmed. A confirmation email is on its way.</p>
+
+                <div class="event-detail-card">
+                    <div class="event-detail-header">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>TSSIA Annual Industry Summit 2025</span>
+                    </div>
+                    <div class="event-detail-grid">
+                        <div class="detail-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <div>
+                                <span class="detail-label">Date</span>
+                                <span class="detail-value">May 15, 2025</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-clock"></i>
+                            <div>
+                                <span class="detail-label">Time</span>
+                                <span class="detail-value">9:00 AM – 6:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <span class="detail-label">Venue</span>
+                                <span class="detail-value">BKC Convention Ctr</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-ticket"></i>
+                            <div>
+                                <span class="detail-label">Entry</span>
+                                <span class="detail-value">Badge at Reception</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registrant-info">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <div>
+                        <span class="detail-label">Registered as</span>
+                        <span class="detail-value" id="registrantName">—</span>
+                    </div>
+                </div>
+
+                <div class="popup-highlights">
+                    <div class="highlight-chip"><i class="fa-solid fa-wifi"></i> Networking Lounge</div>
+                    <div class="highlight-chip"><i class="fa-solid fa-utensils"></i> Lunch Included</div>
+                    <div class="highlight-chip"><i class="fa-solid fa-certificate"></i> Certificate</div>
+                </div>
+
+                <div class="popup-actions">
+                    <button class="popup-btn-back" id="popupBackBtn">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Form
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const form            = document.getElementById('registrationForm');
+        const popup           = document.getElementById('successPopup');
+        const stateProcessing = document.getElementById('stateProcessing');
+        const stateSuccess    = document.getElementById('stateSuccess');
+        const progressBar     = document.getElementById('progressBar');
+        const registrantName  = document.getElementById('registrantName');
+        const popupBackBtn    = document.getElementById('popupBackBtn');
+        const backBtn         = document.getElementById('backBtn');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name  = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            if (!name || !email) return;
+
+            registrantName.textContent = name;
+            popup.classList.add('active');
+            popup.setAttribute('aria-hidden', 'false');
+            stateProcessing.classList.remove('hidden');
+            stateSuccess.classList.add('hidden');
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 18;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    progressBar.style.width = '100%';
+                    setTimeout(showSuccess, 350);
+                } else {
+                    progressBar.style.width = progress + '%';
+                }
+            }, 160);
+        });
+
+        function showSuccess() {
+            stateProcessing.classList.add('hidden');
+            stateSuccess.classList.remove('hidden');
+            stateSuccess.classList.add('fadein');
+        }
+
+        popupBackBtn.addEventListener('click', function () {
+            popup.classList.remove('active');
+            popup.setAttribute('aria-hidden', 'true');
+            stateProcessing.classList.remove('hidden');
+            stateSuccess.classList.add('hidden');
+            stateSuccess.classList.remove('fadein');
+            progressBar.style.width = '0%';
+        });
+
+        backBtn.addEventListener('click', function () {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        popup.addEventListener('click', function (e) {
+            if (e.target === popup) popupBackBtn.click();
+        });
+    </script>
+
+</body>
+
+</html>

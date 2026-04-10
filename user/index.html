@@ -1,312 +1,1368 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | TSSIA Event Hub</title>
-    <meta name="description" content="Register for TSSIA Event Hub – Innovate, Connect, and Lead at our premier industry events.">
+    <title>TSSIA Annual Industry Summit 2025 | Event Landing Page</title>
+    <meta name="description" content="Join TSSIA's premier Annual Industry Summit 2025. Network, innovate, and lead with Thane's top MSME leaders. Register now.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <style>
+        /* ═══════════════════════════════════════
+           DESIGN TOKENS — Light / Contrast Theme
+        ═══════════════════════════════════════ */
+        :root {
+            /* Brand palette */
+            --navy:        #0b1f3a;
+            --navy-mid:    #0d2a52;
+            --navy-dark:   #071428;
+            --gold:        #b8900c;
+            --gold-rich:   #c9a432;
+            --gold-light:  #e8c84a;
+            --gold-pale:   #f7f0d9;
+            --gold-dim:    rgba(184,144,12,0.12);
+            --gold-border: rgba(184,144,12,0.35);
 
+            /* Light surface palette */
+            --bg:          #f5f7fb;
+            --bg-alt:      #eef1f8;
+            --surface:     #ffffff;
+            --surface-2:   #fafbfd;
+
+            /* Typography */
+            --text-primary:  #0b1f3a;
+            --text-secondary:#374a63;
+            --text-muted:    #6b7f97;
+            --text-light:    #9aabb8;
+
+            /* Border */
+            --border:      #dce4f0;
+            --border-dark: #c6d2e4;
+
+            /* Shadow system — crisp, layered */
+            --shadow-xs: 0 1px 3px rgba(11,31,58,0.07), 0 1px 2px rgba(11,31,58,0.05);
+            --shadow-sm: 0 2px 8px rgba(11,31,58,0.08), 0 1px 3px rgba(11,31,58,0.06);
+            --shadow-md: 0 6px 20px rgba(11,31,58,0.10), 0 2px 6px rgba(11,31,58,0.07);
+            --shadow-lg: 0 16px 40px rgba(11,31,58,0.14), 0 4px 12px rgba(11,31,58,0.08);
+            --shadow-xl: 0 24px 60px rgba(11,31,58,0.18), 0 8px 20px rgba(11,31,58,0.10);
+
+            /* Shape */
+            --r-sm:  8px;
+            --r-md:  14px;
+            --r-lg:  20px;
+            --r-xl:  28px;
+
+            --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ═══════════ RESET ═══════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Inter', 'Lato', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ═══════════ TOAST ═══════════ */
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(160%);
+            background: var(--navy);
+            color: #fff;
+            padding: 0.7rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 9999;
+            transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            border: 1px solid var(--gold-border);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .toast i { color: var(--gold-light); font-size: 0.85rem; }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ═══════════ HEADER ═══════════ */
+        header {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 300;
+            box-shadow: var(--shadow-xs);
+        }
+        .header-inner {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0.7rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            flex-shrink: 0;
+        }
+        .logo-group img {
+            height: 44px;
+            width: auto;
+            object-fit: contain;
+        }
+        .logo-fallback {
+            width: 44px;
+            height: 44px;
+            background: var(--navy-mid);
+            border-radius: var(--r-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-fallback span {
+            color: var(--gold-light);
+            font-weight: 800;
+            font-size: 0.65rem;
+            letter-spacing: 0.06em;
+        }
+        .org-name {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: 0.01em;
+            line-height: 1.15;
+        }
+        .org-tagline {
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Desktop nav actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .btn-share {
+            background: transparent;
+            border: 1.5px solid var(--border-dark);
+            color: var(--text-secondary);
+            padding: 0.48rem 1rem;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .btn-share:hover {
+            border-color: var(--navy-mid);
+            color: var(--navy-mid);
+            background: var(--bg-alt);
+            box-shadow: var(--shadow-xs);
+        }
+        .btn-member {
+            background: var(--navy-mid);
+            color: #fff;
+            padding: 0.48rem 1.1rem;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+            border: 1.5px solid var(--navy-mid);
+            white-space: nowrap;
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-member:hover {
+            background: var(--navy-dark);
+            border-color: var(--navy-dark);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        /* ── Hamburger button (mobile only) ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            border: 1.5px solid var(--border-dark);
+            border-radius: var(--r-sm);
+            background: transparent;
+            cursor: pointer;
+            gap: 5px;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .hamburger:hover { background: var(--bg-alt); border-color: var(--navy-mid); }
+        .hamburger span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--navy);
+            border-radius: 2px;
+            transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+        /* Animated X state */
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ── Mobile dropdown nav — DARK NAVY THEME ── */
+        .mobile-nav {
+            display: none; /* block on mobile via media query */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--navy-dark);
+            border-bottom: 2px solid var(--gold-border);
+            box-shadow: 0 12px 40px rgba(7,20,40,0.45), 0 4px 12px rgba(7,20,40,0.25);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                        padding  0.3s ease,
+                        opacity  0.28s ease;
+            opacity: 0;
+            z-index: 299;
+        }
+        .mobile-nav.open {
+            max-height: 380px;
+            padding: 0.85rem 1.1rem 1.2rem;
+            opacity: 1;
+        }
+        /* Thin gold accent line under header on open */
+        .mobile-nav::before {
+            content: '';
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+            margin-bottom: 0.7rem;
+        }
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .mobile-nav-links a,
+        .mobile-nav-links button {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.72rem 0.9rem;
+            border-radius: var(--r-sm);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.72);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            transition: var(--transition);
+            text-decoration: none;
+            width: 100%;
+            text-align: left;
+            letter-spacing: 0.01em;
+        }
+        .mobile-nav-links a:hover,
+        .mobile-nav-links button:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: #fff;
+        }
+        .mobile-nav-links a:active,
+        .mobile-nav-links button:active {
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .mobile-nav-links a i,
+        .mobile-nav-links button i {
+            width: 20px;
+            text-align: center;
+            color: var(--gold-rich);
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        /* Become a Member — special card */
+        .mobile-nav-member {
+            background: rgba(184,144,12,0.10) !important;
+            border: 1.5px solid var(--gold-border) !important;
+            color: var(--gold-light) !important;
+            border-radius: var(--r-sm) !important;
+            margin-bottom: 0.1rem;
+        }
+        .mobile-nav-member:hover {
+            background: rgba(184,144,12,0.18) !important;
+            color: #fff !important;
+        }
+        .mobile-nav-member i { color: var(--gold-light) !important; }
+        .mobile-nav-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.08);
+            margin: 0.4rem 0;
+        }
+        /* Register button */
+        .mobile-nav-register {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.6rem !important;
+            margin-top: 0.35rem !important;
+            background: var(--gold-rich) !important;
+            color: var(--navy-dark) !important;
+            border-radius: 50px !important;
+            padding: 0.85rem 1.25rem !important;
+            font-weight: 800 !important;
+            font-size: 0.92rem !important;
+            box-shadow: 0 4px 16px rgba(184,144,12,0.35);
+            border: none !important;
+            letter-spacing: 0.01em !important;
+        }
+        .mobile-nav-register:hover {
+            background: var(--gold-light) !important;
+            color: var(--navy-dark) !important;
+        }
+        .mobile-nav-register i { color: var(--navy-dark) !important; font-size: 0.88rem; }
+
+        /* ═══════════ HERO — Background Image ═══════════ */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 5.5rem 1.5rem 5rem;
+            text-align: center;
+            /* Background: CSS gradient over a pattern — works without an image file */
+            background:
+                linear-gradient(
+                    165deg,
+                    rgba(11, 27, 58, 0.92) 0%,
+                    rgba(13, 42, 82, 0.88) 45%,
+                    rgba(11, 27, 58, 0.94) 100%
+                ),
+                url('bg.png') no-repeat center center / cover;
+            background-attachment: fixed;
+        }
+        /* Fallback geometric bg if no image */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 90% at 50% -5%, rgba(184,144,12,0.18) 0%, transparent 65%),
+                radial-gradient(circle at 85% 85%, rgba(13,42,82,0.6) 0%, transparent 55%),
+                radial-gradient(circle at 15% 90%, rgba(11,31,58,0.45) 0%, transparent 45%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero-content {
+            max-width: 820px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Tags */
+        .event-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            margin-bottom: 1.8rem;
+        }
+        .event-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.95rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .tag-all {
+            background: rgba(184,144,12,0.18);
+            border: 1px solid rgba(184,144,12,0.45);
+            color: #f5d96a;
+        }
+        .tag-tssia {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Hero Title */
+        .hero-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2.1rem, 6.5vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.18;
+            margin-bottom: 1.6rem;
+            letter-spacing: -0.01em;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+        .hero-title span {
+            color: var(--gold-light);
+            font-weight: 800;
+        }
+
+        /* Meta pills */
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.85rem;
+            margin-bottom: 2.5rem;
+        }
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.84rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            padding: 0.42rem 0.95rem;
+            border-radius: 50px;
+            letter-spacing: 0.01em;
+            backdrop-filter: blur(6px);
+        }
+        .meta-pill i {
+            color: var(--gold-light);
+            font-size: 0.78rem;
+        }
+
+        /* Hero CTA — visible on desktop, hidden on mobile */
+        .btn-register-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: var(--gold-rich);
+            color: #fff;
+            padding: 0.95rem 2.4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.01em;
+            transition: var(--transition);
+            box-shadow: 0 6px 22px rgba(184,144,12,0.40), 0 2px 8px rgba(0,0,0,0.2);
+            border: 2px solid rgba(255,255,255,0.25);
+        }
+        .btn-register-hero:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(184,144,12,0.50), 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .btn-register-hero:active { transform: translateY(0); }
+
+        /* ═══════════ MAIN CONTENT AREA ═══════════ */
+        .main-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem 2rem;
+        }
+
+        /* Section header */
+        .section-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--gold);
+            margin-bottom: 0.55rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.015em;
+            line-height: 1.25;
+        }
+        .section-heading .accent { color: var(--navy-mid); }
+
+        /* ═══════════ DETAILS GRID ═══════════ */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.1rem;
+            margin-bottom: 3rem;
+        }
+        .detail-card {
+            background: var(--surface);
+            padding: 1.4rem 1.3rem;
+            border-radius: var(--r-md);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+        .detail-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-dark);
+            transform: translateY(-3px);
+        }
+        .detail-icon {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(11,31,58,0.2);
+        }
+        .detail-label {
+            font-size: 0.67rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            margin-bottom: 0.22rem;
+        }
+        .detail-value {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.45;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ═══════════ PERKS STRIP ═══════════ */
+        .perks-section {
+            margin-bottom: 3.5rem;
+        }
+        .perks-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: flex-start;
+        }
+        .perk-chip {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.5rem 1.05rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: var(--transition);
+            cursor: default;
+            box-shadow: var(--shadow-xs);
+        }
+        .perk-chip i {
+            color: var(--navy-mid);
+            font-size: 0.78rem;
+            opacity: 0.75;
+            transition: var(--transition);
+        }
+        .perk-chip:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow-sm);
+            color: var(--navy);
+            background: var(--gold-pale);
+        }
+        .perk-chip:hover i { opacity: 1; color: var(--gold); }
+
+        /* ═══════════ VENUE + MAP SECTION ═══════════ */
+        .venue-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+        .venue-info-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 2rem 1.75rem;
+            box-shadow: var(--shadow-md);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+        .venue-info-card .section-eyebrow { margin-bottom: 0.2rem; }
+        .venue-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 0.2rem;
+        }
+        .venue-address {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .venue-address i { color: var(--gold); margin-top: 0.2rem; flex-shrink: 0; font-size: 0.85rem; }
+        .venue-detail-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .venue-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.87rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .venue-row i {
+            width: 18px;
+            text-align: center;
+            color: var(--navy-mid);
+            font-size: 0.82rem;
+            opacity: 0.8;
+        }
+
+        /* CTA button inside venue card — only on desktop */
+        .btn-register-venue {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--navy-mid);
+            color: #fff;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border: 2px solid var(--navy-mid);
+            box-shadow: var(--shadow-sm);
+            align-self: flex-start;
+        }
+        .btn-register-venue:hover {
+            background: var(--gold-rich);
+            border-color: var(--gold-rich);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(184,144,12,0.35);
+        }
+
+        /* MAP BOX */
+        .map-box {
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            background: var(--bg-alt);
+            position: relative;
+        }
+        .map-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            letter-spacing: 0.03em;
+        }
+        .map-label i { color: var(--navy-mid); font-size: 0.85rem; }
+        .map-box iframe {
+            display: block;
+            width: 100%;
+            height: 340px;
+            border: 0;
+        }
+
+        /* ═══════════ MOBILE REGISTER BUTTON (only on mobile) ═══════════ */
+        .mobile-register-bar { display: none; }
+
+        /* ═══════════ FOOTER ═══════════ */
+        footer {
+            background: var(--navy-dark);
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 3px solid var(--gold);
+        }
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.2rem 1.5rem 1.2rem;
+        }
+        .footer-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 2.5rem;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding-bottom: 1.4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .footer-logo-fallback {
+            width: 36px;
+            height: 36px;
+            background: rgba(232,200,74,0.12);
+            border: 1px solid var(--gold-border);
+            border-radius: var(--r-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .footer-logo-fallback span {
+            color: var(--gold-light);
+            font-weight: 800;
+            font-size: 0.6rem;
+            letter-spacing: 0.04em;
+        }
+        .footer-brand img { height: 36px; width: auto; object-fit: contain; }
+        .footer-brand-text .brand-name { font-size: 0.9rem; font-weight: 800; color: #fff; }
+        .footer-brand-text .brand-sub {
+            font-size: 0.63rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-top: 0.9rem;
+        }
+        .footer-contact a, .footer-contact span {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.78rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+        }
+        .footer-contact a i, .footer-contact span i { color: var(--gold-rich); font-size: 0.7rem; width: 14px; }
+        .footer-contact a:hover { color: rgba(255,255,255,0.9); }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            align-items: flex-start;
+            align-content: flex-start;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.78rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.32rem 0.75rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+        .footer-links a i { font-size: 0.7rem; }
+        .footer-links a:hover {
+            color: var(--gold-light);
+            border-color: var(--gold-border);
+            background: rgba(184,144,12,0.1);
+        }
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            padding-top: 1rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.3);
+        }
+        .footer-bottom a { color: rgba(255,255,255,0.4); transition: var(--transition); }
+        .footer-bottom a:hover { color: var(--gold-light); }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE BREAKPOINTS
+        ═══════════════════════════════════════ */
+
+        /* ── Tablet (≤ 900px) ── */
+        @media (max-width: 900px) {
+            .details-grid { grid-template-columns: repeat(2, 1fr); }
+            .venue-section { grid-template-columns: 1fr; }
+            .map-box iframe { height: 280px; }
+        }
+
+        /* ── Mobile (≤ 640px) ── */
+        @media (max-width: 640px) {
+            /* Header — show hamburger, hide desktop actions */
+            header { position: sticky; }
+            .header-inner { padding: 0.6rem 1rem; }
+            .org-name { font-size: 0.88rem; }
+            .org-tagline { display: none; }
+            .header-actions { display: none; }  /* hide desktop nav on mobile */
+            .hamburger { display: flex; }       /* show hamburger */
+            .mobile-nav { display: block; }     /* enable the dropdown */
+
+            /* Hero — tighter layout */
+            .hero {
+                padding: 3.5rem 1rem 3rem;
+                background-attachment: scroll;
+            }
+            .hero-title { font-size: clamp(1.8rem, 7.5vw, 2.6rem); margin-bottom: 1.25rem; }
+            .hero-meta { gap: 0.4rem 0.6rem; margin-bottom: 0; }
+            .meta-pill { font-size: 0.78rem; padding: 0.35rem 0.8rem; }
+
+            /* Hide hero register button on mobile — shown in sticky bar instead */
+            .btn-register-hero { display: none; }
+
+            /* Main section */
+            .main-content { padding: 2.5rem 1rem 1.5rem; }
+            .section-heading { margin-bottom: 1.5rem; }
+            .details-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+            .detail-card { padding: 1.1rem 1rem; }
+
+            /* Perks */
+            .perks-strip { gap: 0.45rem; }
+            .perk-chip { font-size: 0.76rem; padding: 0.42rem 0.85rem; }
+
+            /* Venue section stacked */
+            .venue-section { gap: 1rem; margin-bottom: 2rem; }
+            .venue-info-card { padding: 1.4rem 1.2rem; }
+            .venue-title { font-size: 1.2rem; }
+            .map-box iframe { height: 240px; }
+
+            /* Hide desktop CTA inside venue card on mobile */
+            .btn-register-venue { display: none; }
+
+            /* Mobile sticky register bar */
+            .mobile-register-bar {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 400;
+                background: rgba(255,255,255,0.97);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-top: 1px solid var(--border);
+                padding: 0.85rem 1.25rem;
+                box-shadow: 0 -4px 24px rgba(11,31,58,0.12);
+                justify-content: center;
+            }
+            .mobile-register-bar a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.6rem;
+                width: 100%;
+                max-width: 400px;
+                background: var(--navy-mid);
+                color: #fff;
+                padding: 0.88rem 1.5rem;
+                border-radius: 50px;
+                font-weight: 700;
+                font-size: 0.95rem;
+                box-shadow: var(--shadow-md);
+                transition: var(--transition);
+                border: 2px solid var(--navy-mid);
+            }
+            .mobile-register-bar a i { color: var(--gold-light); }
+            .mobile-register-bar a:active {
+                background: var(--navy-dark);
+                transform: scale(0.98);
+            }
+
+            /* Add bottom padding so content isn't hidden behind bar */
+            body { padding-bottom: 80px; }
+
+            /* Footer adjustments */
+            .footer-top { flex-direction: column; gap: 1.2rem; }
+            .footer-links { gap: 0.4rem; }
+            .footer-bottom { justify-content: center; text-align: center; }
+        }
+
+        /* ── Very small (≤ 380px) ── */
+        @media (max-width: 380px) {
+            .hero-title { font-size: 1.7rem; }
+            .meta-pill { font-size: 0.72rem; padding: 0.3rem 0.65rem; }
+            .detail-card { padding: 0.95rem; }
+        }
+    </style>
+</head>
 <body>
 
-    <!-- Animated Background Orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
-    <!-- Main Page -->
-    <div class="page-wrapper" id="formPage">
-        <main class="split-container">
-
-            <!-- Left: Branding Panel -->
-            <section class="media-column">
-                <div class="media-overlay"></div>
-                <img src="bg.png" alt="TSSIA Event" class="media-img">
-                <div class="media-content">
-                    <div class="brand-badge">
-                        <i class="fa-solid fa-bolt"></i>
-                        <span>TSSIA 2025</span>
-                    </div>
-                    <h1 class="brand-title">Event<br>Hub</h1>
-                    <p class="brand-subtitle">Innovate. Connect. Lead.</p>
-                    <div class="event-meta">
-                        <div class="event-meta-item">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            <span>May 15, 2025</span>
-                        </div>
-                        <div class="event-meta-item">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span>Mumbai, India</span>
-                        </div>
-                        <div class="event-meta-item">
-                            <i class="fa-solid fa-users"></i>
-                            <span>500+ Attendees</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Right: Form Panel -->
-            <section class="form-column">
-                <div class="form-inner">
-                    <header class="form-header">
-                        <div class="form-header-icon">
-                            <i class="fa-solid fa-id-card-clip"></i>
-                        </div>
-                        <div>
-                            <h2>Registration</h2>
-                            <p>Fill in your professional profile</p>
-                        </div>
-                    </header>
-
-                    <form class="glass-form" id="registrationForm" novalidate>
-
-                        <div class="form-row">
-                            <div class="input-group">
-                                <label for="name">Full Name <span class="required-star">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-user"></i>
-                                    <input type="text" id="name" name="name" placeholder="John Doe" required>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label for="email">Email ID <span class="required-star">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-envelope"></i>
-                                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="input-group">
-                                <label for="mobile">Mobile <span class="required-star">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <input type="text" id="mobile" name="mobile" placeholder="+91 XXXXX XXXXX" required>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label for="designation">Designation <span class="required-star">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-briefcase"></i>
-                                    <input type="text" id="designation" name="designation" placeholder="Manager" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="orgname">Organization Name <span class="required-star">*</span></label>
-                            <div class="input-wrapper">
-                                <i class="fa-solid fa-building"></i>
-                                <input type="text" id="orgname" name="orgname" placeholder="Company Name Ltd." required>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="input-group">
-                                <label for="gstno">GST No. <span class="required-star">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-receipt"></i>
-                                    <input type="text" id="gstno" name="gstno" placeholder="22AAAAA0000A1Z5" required>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label for="tssiamemno">Membership No. <span class="required-star">*</span></label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-address-card"></i>
-                                    <input type="text" id="tssiamemno" name="tssiamemno" placeholder="TSSIA-XXXX" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-buttons">
-                            <button type="button" class="btn-back" id="backBtn">
-                                <i class="fa-solid fa-arrow-left"></i> Back
-                            </button>
-                            <button type="submit" class="btn-register" id="submitBtn">
-                                Register Now <i class="fa-solid fa-bolt"></i>
-                            </button>
-                        </div>
-
-                    </form>
-                </div>
-            </section>
-
-        </main>
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-check-circle"></i>
+        <span id="toastMsg">Link copied!</span>
     </div>
 
-    <!-- Success Popup Overlay -->
-    <div class="popup-overlay" id="successPopup" aria-hidden="true">
-        <div class="popup-card" role="dialog" aria-labelledby="popupTitle" aria-modal="true">
-
-            <!-- Processing State -->
-            <div class="popup-state" id="stateProcessing">
-                <div class="spinner-ring">
-                    <div class="spinner"></div>
-                    <div class="spinner-icon"><i class="fa-solid fa-bolt"></i></div>
+    <!-- ══════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════ -->
+    <header id="site-header">
+        <div class="header-inner">
+            <!-- Logo -->
+            <a href="https://tssia.org" target="_blank" rel="noopener" class="logo-group" id="tssia-logo-link">
+                <img src="tssia_logo.png" alt="TSSIA Logo" id="tssia-logo"
+                     onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex'">
+                <div id="logo-fallback" class="logo-fallback" style="display:none;">
+                    <span>TSSIA</span>
                 </div>
-                <h3 class="popup-title">Registering You...</h3>
-                <p class="popup-subtitle">Please wait while we secure your spot</p>
-                <div class="progress-bar-wrap">
-                    <div class="progress-bar" id="progressBar"></div>
+                <div>
+                    <div class="org-name">TSSIA</div>
+                    <div class="org-tagline">Service to MSME</div>
+                </div>
+            </a>
+
+            <!-- Desktop actions (hidden on mobile via CSS) -->
+            <div class="header-actions">
+                <button class="btn-share" id="shareBtn" aria-label="Share event link">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <span>Share</span>
+                </button>
+                <a href="https://tssia.org/become-a-member" target="_blank" rel="noopener" class="btn-member" id="member-link">
+                    <i class="fa-solid fa-id-badge"></i>
+                    <span>Membership</span>
+                </a>
+            </div>
+
+            <!-- Hamburger button (mobile only — shown via CSS media query) -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Dropdown — dark navy theme -->
+        <nav class="mobile-nav" id="mobileNavMenu" aria-hidden="true" aria-label="Mobile navigation">
+            <div class="mobile-nav-links">
+
+                <!-- Become a Member — prominent gold-bordered card -->
+                <a href="https://tssia.org/become-a-member" target="_blank" rel="noopener"
+                   class="mobile-nav-member" id="memberLinkMobile">
+                    <i class="fa-solid fa-id-badge"></i>
+                    Become a Member
+                </a>
+
+                <div class="mobile-nav-divider"></div>
+
+                <button id="shareBtnMobile" aria-label="Share event">
+                    <i class="fa-solid fa-share-nodes"></i> Share Event
+                </button>
+
+                <a href="https://tssia.org" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-globe"></i> Visit tssia.org
+                </a>
+
+                <a href="https://tssia.org/events" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-calendar-days"></i> TSSIA Events
+                </a>
+
+                <div class="mobile-nav-divider"></div>
+
+                <a href="reg.html" class="mobile-nav-register" id="registerNavBtn">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Register Now
+                </a>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- ══════════════════════════════════════
+         HERO — Dark bg image with overlay
+    ══════════════════════════════════════ -->
+    <section class="hero" id="hero-section" aria-label="Event Banner">
+        <div class="hero-content">
+            <div class="event-tags">
+                <span class="event-tag tag-all"><i class="fa-solid fa-globe"></i> Open to All</span>
+                <span class="event-tag tag-tssia"><i class="fa-solid fa-star"></i> TSSIA Members</span>
+            </div>
+
+            <h1 class="hero-title" id="event-title">
+                TSSIA Annual<br><span>Industry Summit</span> 2025
+            </h1>
+
+            <div class="hero-meta">
+                <span class="meta-pill"><i class="fa-solid fa-calendar-days"></i> Sat, 15 May 2025</span>
+                <span class="meta-pill"><i class="fa-solid fa-clock"></i> 9:00 AM – 6:00 PM IST</span>
+                <span class="meta-pill"><i class="fa-solid fa-location-dot"></i> BKC Convention Centre, Mumbai</span>
+            </div>
+
+            <!-- Desktop only CTA -->
+            <br>
+            <a href="reg.html" class="btn-register-hero" id="register-btn-hero">
+                Register Now &nbsp;<i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         MAIN
+    ══════════════════════════════════════ -->
+    <main>
+        <div class="main-content" id="event-details">
+
+            <!-- ── Event Details ── -->
+            <div class="section-eyebrow"><i class="fa-solid fa-circle-info"></i> At a Glance</div>
+            <h2 class="section-heading">Event <span class="accent">Details</span></h2>
+
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                    <div>
+                        <div class="detail-label">Date</div>
+                        <div class="detail-value">Saturday, 15 May 2025</div>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fa-solid fa-clock"></i></div>
+                    <div>
+                        <div class="detail-label">Time</div>
+                        <div class="detail-value">9:00 AM – 6:00 PM IST</div>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <div class="detail-label">Venue &amp; Address</div>
+                        <div class="detail-value">BKC Convention Centre,<br>Bandra Kurla Complex, Mumbai – 400 051</div>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fa-solid fa-ticket"></i></div>
+                    <div>
+                        <div class="detail-label">Entry</div>
+                        <div class="detail-value">Badge Collection at Reception</div>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fa-solid fa-users"></i></div>
+                    <div>
+                        <div class="detail-label">Expected Attendees</div>
+                        <div class="detail-value">500+ Industry Leaders</div>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fa-solid fa-id-badge"></i></div>
+                    <div>
+                        <div class="detail-label">Open For</div>
+                        <div class="detail-value">All &amp; TSSIA Members</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Success State -->
-            <div class="popup-state hidden" id="stateSuccess">
-                <div class="success-checkmark">
-                    <svg viewBox="0 0 52 52" class="checkmark-svg">
-                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                    </svg>
+            <!-- ── Perks Strip ── -->
+            <div class="perks-section">
+                <div class="section-eyebrow" style="margin-bottom:0.8rem;"><i class="fa-solid fa-star"></i> What's Included</div>
+                <div class="perks-strip">
+                    <div class="perk-chip"><i class="fa-solid fa-wifi"></i> Networking Lounge</div>
+                    <div class="perk-chip"><i class="fa-solid fa-utensils"></i> Lunch &amp; Dinner</div>
+                    <div class="perk-chip"><i class="fa-solid fa-certificate"></i> Certificate</div>
+                    <div class="perk-chip"><i class="fa-solid fa-microphone"></i> Keynote Sessions</div>
+                    <div class="perk-chip"><i class="fa-solid fa-handshake"></i> B2B Matchmaking</div>
+                    <div class="perk-chip"><i class="fa-solid fa-store"></i> Exhibition Stalls</div>
+                    <div class="perk-chip"><i class="fa-solid fa-photo-film"></i> Live Coverage</div>
+                    <div class="perk-chip"><i class="fa-solid fa-gift"></i> Goody Bag</div>
                 </div>
+            </div>
 
-                <div class="popup-badge">Registration Confirmed</div>
-                <h3 class="popup-title" id="popupTitle">You're In! 🎉</h3>
-                <p class="popup-subtitle">Your registration is confirmed. A confirmation email is on its way.</p>
+            <!-- ── Venue + Map ── -->
+            <div class="venue-section">
 
-                <div class="event-detail-card">
-                    <div class="event-detail-header">
-                        <i class="fa-solid fa-calendar-check"></i>
-                        <span>TSSIA Annual Industry Summit 2025</span>
-                    </div>
-                    <div class="event-detail-grid">
-                        <div class="detail-item">
-                            <i class="fa-regular fa-calendar"></i>
-                            <div>
-                                <span class="detail-label">Date</span>
-                                <span class="detail-value">May 15, 2025</span>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fa-solid fa-clock"></i>
-                            <div>
-                                <span class="detail-label">Time</span>
-                                <span class="detail-value">9:00 AM – 6:00 PM</span>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <div>
-                                <span class="detail-label">Venue</span>
-                                <span class="detail-value">BKC Convention Ctr, Mumbai</span>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fa-solid fa-ticket"></i>
-                            <div>
-                                <span class="detail-label">Entry</span>
-                                <span class="detail-value">Badge at Reception</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="registrant-info">
-                    <i class="fa-solid fa-circle-user"></i>
+                <!-- Venue Info Card -->
+                <div class="venue-info-card">
                     <div>
-                        <span class="detail-label">Registered as</span>
-                        <span class="detail-value" id="registrantName">—</span>
+                        <div class="section-eyebrow"><i class="fa-solid fa-map-pin"></i> Find Us Here</div>
+                        <div class="venue-title">TSSIA Office, Thane</div>
+                        <div class="venue-address">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Thane Small Scale Industries Association,<br>
+                            Thane, Maharashtra, India</span>
+                        </div>
                     </div>
+                    <div class="venue-detail-rows">
+                        <div class="venue-row">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            Saturday, 15 May 2025
+                        </div>
+                        <div class="venue-row">
+                            <i class="fa-solid fa-clock"></i>
+                            9:00 AM – 6:00 PM IST
+                        </div>
+                        <div class="venue-row">
+                            <i class="fa-solid fa-car"></i>
+                            Parking available on-site
+                        </div>
+                        <div class="venue-row">
+                            <i class="fa-solid fa-train"></i>
+                            Nearest station: Thane Railway Station
+                        </div>
+                    </div>
+                    <!-- Desktop register button -->
+                    <a href="reg.html" class="btn-register-venue" id="register-btn-venue">
+                        <i class="fa-solid fa-pen-to-square"></i> Register Now
+                    </a>
                 </div>
 
-                <div class="popup-highlights">
-                    <div class="highlight-chip"><i class="fa-solid fa-wifi"></i> Networking Lounge</div>
-                    <div class="highlight-chip"><i class="fa-solid fa-utensils"></i> Lunch Included</div>
-                    <div class="highlight-chip"><i class="fa-solid fa-certificate"></i> Certificate</div>
+                <!-- Google Maps Embed -->
+                <div class="map-box">
+                    <div class="map-label">
+                        <i class="fa-solid fa-map"></i>
+                        Thane Small Scale Industries Association
+                    </div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.0095167348104!2d72.95020817425801!3d19.194786682034362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b905e58b6475%3A0xdd6ba8c1b8b48da7!2sThane%20Small%20Scale%20Industries%20Association!5e0!3m2!1sen!2sin!4v1775825916487!5m2!1sen!2sin"
+                        width="600"
+                        height="450"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="TSSIA Location on Google Maps">
+                    </iframe>
                 </div>
 
-                <div class="popup-actions">
-                    <button class="popup-btn-back" id="popupBackBtn">
-                        <i class="fa-solid fa-arrow-left"></i> Back to Form
-                    </button>
-                </div>
             </div>
 
         </div>
+    </main>
+
+    <!-- ══════════════════════════════════════
+         MOBILE STICKY REGISTER BUTTON
+         (only visible on mobile via CSS)
+    ══════════════════════════════════════ -->
+    <div class="mobile-register-bar" id="mobileRegisterBar" aria-label="Register for event">
+        <a href="reg.html" id="register-btn-mobile">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Register Now — Free Entry
+        </a>
     </div>
 
+    <!-- ══════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════ -->
+    <footer id="site-footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <!-- Brand + Contact -->
+                <div>
+                    <div class="footer-brand">
+                        <img src="tssia_logo.png" alt="TSSIA" style="height:36px;"
+                             onerror="this.style.display='none';document.getElementById('footer-logo-fallback').style.display='flex'">
+                        <div id="footer-logo-fallback" class="footer-logo-fallback" style="display:none;">
+                            <span>TSSIA</span>
+                        </div>
+                        <div class="footer-brand-text">
+                            <div class="brand-name">TSSIA</div>
+                            <div class="brand-sub">Thane Small Scale Industries Association</div>
+                        </div>
+                    </div>
+                    <div class="footer-contact">
+                        <a href="mailto:secretary@tssia.org"><i class="fa-solid fa-envelope"></i> secretary@tssia.org</a>
+                        <span><i class="fa-solid fa-phone"></i> +91 77188 79764</span>
+                        <span><i class="fa-solid fa-phone"></i> +91 22 2582 0429</span>
+                    </div>
+                </div>
+                <!-- Links -->
+                <div class="footer-links">
+                    <a href="https://tssia.org" target="_blank" rel="noopener"><i class="fa-solid fa-house"></i> Website</a>
+                    <a href="https://tssia.org/become-a-member" target="_blank" rel="noopener"><i class="fa-solid fa-id-badge"></i> Membership</a>
+                    <a href="https://tssia.org/events" target="_blank" rel="noopener"><i class="fa-solid fa-calendar-days"></i> Events</a>
+                    <a href="https://tssia.org/about" target="_blank" rel="noopener"><i class="fa-solid fa-circle-info"></i> About</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 TSSIA — All rights reserved.</span>
+                <a href="https://tssia.org" target="_blank" rel="noopener">tssia.org</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        const form = document.getElementById('registrationForm');
-        const popup = document.getElementById('successPopup');
-        const stateProcessing = document.getElementById('stateProcessing');
-        const stateSuccess = document.getElementById('stateSuccess');
-        const progressBar = document.getElementById('progressBar');
-        const registrantName = document.getElementById('registrantName');
-        const popupBackBtn = document.getElementById('popupBackBtn');
-        const backBtn = document.getElementById('backBtn');
+        // ── Shared share function ─────────────────────────────────
+        const toast    = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
 
-        // Show popup with processing → success transition
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            if (!name || !email) return;
-
-            registrantName.textContent = name;
-
-            // Show overlay
-            popup.classList.add('active');
-            popup.setAttribute('aria-hidden', 'false');
-            stateProcessing.classList.remove('hidden');
-            stateSuccess.classList.add('hidden');
-
-            // Animate progress bar
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 18;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    progressBar.style.width = '100%';
-                    setTimeout(showSuccess, 350);
-                } else {
-                    progressBar.style.width = progress + '%';
-                }
-            }, 160);
-        });
-
-        function showSuccess() {
-            stateProcessing.classList.add('hidden');
-            stateSuccess.classList.remove('hidden');
-            stateSuccess.classList.add('fadein');
+        function showToast(msg) {
+            toastMsg.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // Back button on popup → go back to form
-        popupBackBtn.addEventListener('click', function () {
-            popup.classList.remove('active');
-            popup.setAttribute('aria-hidden', 'true');
-            stateProcessing.classList.remove('hidden');
-            stateSuccess.classList.add('hidden');
-            stateSuccess.classList.remove('fadein');
-            progressBar.style.width = '0%';
+        async function doShare() {
+            const url = window.location.href;
+            const shareData = {
+                title: 'TSSIA Annual Industry Summit 2025',
+                text:  'Join the TSSIA Annual Industry Summit 2025 — Register now!',
+                url
+            };
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    await navigator.clipboard.writeText(url);
+                    showToast('Link copied to clipboard!');
+                }
+            } catch (_) {
+                try {
+                    await navigator.clipboard.writeText(url);
+                    showToast('Link copied to clipboard!');
+                } catch (_) {
+                    showToast('Copy URL: ' + url);
+                }
+            }
+        }
+
+        // Desktop share button
+        const shareBtn = document.getElementById('shareBtn');
+        if (shareBtn) shareBtn.addEventListener('click', doShare);
+
+        // Mobile share button (inside hamburger menu)
+        const shareBtnMobile = document.getElementById('shareBtnMobile');
+        if (shareBtnMobile) shareBtnMobile.addEventListener('click', () => {
+            closeMenu();
+            doShare();
         });
 
-        // Back button on form → browser history or custom action
-        backBtn.addEventListener('click', function () {
-            if (window.history.length > 1) {
-                window.history.back();
+        // ── Hamburger / Mobile Nav ───────────────────────────────
+        const hamburgerBtn  = document.getElementById('hamburgerBtn');
+        const mobileNavMenu = document.getElementById('mobileNavMenu');
+
+        function openMenu() {
+            hamburgerBtn.classList.add('open');
+            mobileNavMenu.classList.add('open');
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+            mobileNavMenu.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeMenu() {
+            hamburgerBtn.classList.remove('open');
+            mobileNavMenu.classList.remove('open');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            mobileNavMenu.setAttribute('aria-hidden', 'true');
+        }
+
+        function toggleMenu() {
+            if (mobileNavMenu.classList.contains('open')) {
+                closeMenu();
             } else {
-                window.location.href = '../index.html';
+                openMenu();
+            }
+        }
+
+        if (hamburgerBtn) hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // Auto-close on any nav link/button click inside the menu
+        if (mobileNavMenu) {
+            mobileNavMenu.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('click', () => {
+                    // Small delay so the link/button action fires first
+                    setTimeout(closeMenu, 120);
+                });
+            });
+        }
+
+        // Auto-close on outside click (tap anywhere else)
+        document.addEventListener('click', (e) => {
+            if (
+                mobileNavMenu &&
+                mobileNavMenu.classList.contains('open') &&
+                !mobileNavMenu.contains(e.target) &&
+                e.target !== hamburgerBtn &&
+                !hamburgerBtn.contains(e.target)
+            ) {
+                closeMenu();
             }
         });
 
-        // Close on overlay click
-        popup.addEventListener('click', function (e) {
-            if (e.target === popup) {
-                popupBackBtn.click();
+        // Auto-close on scroll
+        window.addEventListener('scroll', () => {
+            if (mobileNavMenu && mobileNavMenu.classList.contains('open')) {
+                closeMenu();
+            }
+        }, { passive: true });
+
+        // Auto-close on window resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 640 && mobileNavMenu) {
+                closeMenu();
             }
         });
+
+        // ── Mobile sticky bar sync ────────────────────────────────
+        function syncMobileBar() {
+            if (window.innerWidth <= 640) {
+                document.body.style.paddingBottom = '80px';
+            } else {
+                document.body.style.paddingBottom = '0';
+            }
+        }
+        syncMobileBar();
+        window.addEventListener('resize', syncMobileBar);
     </script>
-
 </body>
-
 </html>
